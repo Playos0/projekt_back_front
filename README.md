@@ -41,4 +41,16 @@ NA 100% NA TERAZ:
 
 -Pozwolenia
 
+-klienci 
+
+
+relacje:
+
+-klienci 1:n Pozwolenia, rezerwacje, +nie wiem
+
+-łowisko 1:n łódki, sprzęt(tylko te co są na wynajem, może odzzielna tabela)
+
+-łowsika m:n Rezerwację. tutaj 100% pomocnicza
+
+-+++ jeszcze nie wiem
 
