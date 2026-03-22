@@ -1,6 +1,9 @@
 -sklep/wynajem sprzętu wędkarskiego
 
 
+0. system logowania by ułatwić funkcjonowanie w systemie
+
+
 1. Mapka z łowiskami + kupowanie zezwoleń
 
 2. Wynajem sprzętu 
@@ -14,6 +17,8 @@
 6. Wynajem Łodzi 
 
 7. System subskrypcji umożliwiający łowienie na różnych łowiskach i w lepszych wersjach możliwość użytkowania łodzi
+
+7.proponuje uproszczenie systemu do subskrybcji na system miesięczny/3 miesięczny/roczny
 
 
 ++++do ustalenia
