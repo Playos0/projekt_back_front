@@ -2,22 +2,21 @@
 #do .Net ASP
 #=================
 
-bin/
-obj/
-.vs/
+**/bin/
+**/obj/
+**/.vs/
 *.user
 *.suo
 *.log
-logs/
-appsettings.Development.json
-publish/
+**/logs/
+**/publish/
 
 #=================
 #OS
 #=================
 .DS_Store
 Thumbs.db
-
+appsettings.Development.json
 #=================
 #IDE
 #=================
