@@ -2,15 +2,15 @@
 #do .Net ASP
 #=================
 
-/bin/
-/obj/
-/.vs/
-/*.user
-/*.suo
-/*.log
-/logs/
-/appsettings.Development.json
-/publish/
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.log
+logs/
+appsettings.Development.json
+publish/
 
 #=================
 #OS
