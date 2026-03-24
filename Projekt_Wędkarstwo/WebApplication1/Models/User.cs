@@ -14,7 +14,8 @@ namespace WebApplication1.Models
 
         public string? Address { get; set; }
 
-      
+        [Required]
+        public required string Password { get; set; }
 
     }
 }
