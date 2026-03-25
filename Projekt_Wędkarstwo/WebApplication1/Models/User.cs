@@ -15,9 +15,10 @@ namespace WebApplication1.Models
 
         public string? Address { get; set; }
 
-        [Required]
+
+       [Required]  
         public required string HashedPassword { get; set; }
-      
+
 
     }
 }

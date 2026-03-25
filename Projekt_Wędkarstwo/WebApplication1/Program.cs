@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Identity;
+using WebApplication1.Services;
+using WebApplication1.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
