@@ -19,9 +19,10 @@ namespace WebApplication1.Services
             return _hasher.HashPassword(null!, password);
         }
 
-        public bool VerifyPassword(string hashedPassword, string providedPassword)
+        public bool VerifyPassword(string providedPassword, string hashedPassword)
         {
             var result = _hasher.VerifyHashedPassword(null!, hashedPassword, providedPassword);
+
             return result == PasswordVerificationResult.Success;
         }
 
