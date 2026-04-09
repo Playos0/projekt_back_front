@@ -2,6 +2,7 @@
 using WebApplication1.Services.Interfaces;
 using WebApplication1.Models;
 using System.Collections.Concurrent;
+using WebApplication1.Data;
 
 namespace WebApplication1.Services
 {
@@ -20,7 +21,7 @@ namespace WebApplication1.Services
 
         public bool Register(string email, string password)
         {
-            if (_context.User.Any(u => u.Email == email))
+            if (_context.Users.Any(u => u.Email == email))
             {
                 return false;
             }
@@ -34,7 +35,7 @@ namespace WebApplication1.Services
                 HashedPassword = hashedPassword
             };
     
-            _context.User.Add(newUser);
+            _context.Users.Add(newUser);
             _context.SaveChanges();
 
             return true; // Rejestracja udana
@@ -42,7 +43,7 @@ namespace WebApplication1.Services
 
         public bool Login(string email, string password)
         {
-            var user = _context.User.FirstOrDefault(user => user.Email == email);
+            var user = _context.Users.FirstOrDefault(user => user.Email == email);
             if (user == null) 
             {
                 return false;
