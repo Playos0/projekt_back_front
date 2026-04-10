@@ -26,6 +26,18 @@ builder.Services.AddScoped<IPasswordService, PasswordService>();
 //Serwis do autoryzacji
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+//tutaj dodanie CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
+
 
 //tutaj powiozanie z baza danych
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -47,6 +59,8 @@ if (app.Environment.IsDevelopment())
 }
 
 //tu strefa do debugowania ca³ego syfu itd
+
+app.UseCors();
 
 app.UseAuthorization();
 
