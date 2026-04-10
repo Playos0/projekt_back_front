@@ -20,7 +20,7 @@ namespace WebApplication1.Controllers
 
         [HttpPost("register")]
         public IActionResult Register([FromBody] RegisterRequestDto dto)
-        {
+        {   
             var email = dto.Email.ToLowerInvariant();
 
             var result = _authService.Register(email, dto.Password);
