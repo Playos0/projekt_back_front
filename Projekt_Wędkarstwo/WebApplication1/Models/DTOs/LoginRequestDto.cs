@@ -2,7 +2,7 @@
 
 namespace WebApplication1.Models.DTOs
 {
-    public class LoginRequest
+    public class LoginRequestDto
     {
         [Required]
         [EmailAddress]
