@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 using WebApplication1.Data;
 using WebApplication1.Services;
 using WebApplication1.Services.Interfaces;
@@ -37,6 +41,28 @@ builder.Services.AddCors(options =>
     });
 });
 
+//implementacja JWT
+var jwtSettings = builder.Configuration.GetSection("Jwt");
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+
+        ValidIssuer = jwtSettings["Issuer"],
+        ValidAudience = jwtSettings["Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))
+    };
+});
+builder.Services.AddAuthorization();
 
 
 //tutaj powiozanie z baza danych
@@ -59,6 +85,9 @@ if (app.Environment.IsDevelopment())
 }
 
 //tu strefa do debugowania ca³ego syfu itd
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseCors();
 
