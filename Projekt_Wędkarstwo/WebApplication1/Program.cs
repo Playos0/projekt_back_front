@@ -30,6 +30,9 @@ builder.Services.AddScoped<IPasswordService, PasswordService>();
 //Serwis do autoryzacji
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+//Serwis do JWT
+builder.Services.AddScoped<IJwtService, JwtService>();
+
 //tutaj dodanie CORS
 builder.Services.AddCors(options =>
 {

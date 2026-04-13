@@ -38,14 +38,14 @@ namespace WebApplication1.Controllers
         {
             var email = dto.Email.ToLowerInvariant();
 
-            var result = _authService.Login(email, dto.Password);
+            var token = _authService.Login(email, dto.Password);
 
-            if (!result)
+            if(token == null)
             {
                 return Unauthorized("Invalid email or password");
             }
 
-            return Ok();
+            return Ok(new { Token = token });
         }
 
     }

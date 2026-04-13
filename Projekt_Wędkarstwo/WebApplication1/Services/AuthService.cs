@@ -11,11 +11,13 @@ namespace WebApplication1.Services
         //tu będzie jakaś baza danych
         private readonly IPasswordService _passwordService;
         private readonly AppDbContext _context;
+        private readonly IJwtService _jwtService;
 
-        public AuthService(IPasswordService passwordService, AppDbContext context)
+        public AuthService(IPasswordService passwordService, AppDbContext context, IJwtService jwtService)
         {
             _passwordService = passwordService;
             _context = context;
+            _jwtService = jwtService;
         }
 
 
@@ -41,16 +43,20 @@ namespace WebApplication1.Services
             return true; // Rejestracja udana
         }
 
-        public bool Login(string email, string password)
+        public string? Login(string email, string password)
         {
             var user = _context.Users.FirstOrDefault(user => user.Email == email);
             if (user == null) 
             {
-                return false;
+                return null;
             }
 
-            return _passwordService.VerifyPassword(password, user.HashedPassword);
+            if(!_passwordService.VerifyPassword(password, user.HashedPassword))
+            {
+                return null;
+            }
 
+            return _jwtService.GenerateToken(user);
         }
 
     }
