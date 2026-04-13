@@ -13,12 +13,11 @@ namespace WebApplication1.Models
         [EmailAddress]
         public required string Email { get; set; }
 
-        public string? Address { get; set; }
-
-
        [Required]  
         public required string HashedPassword { get; set; }
 
+        [Required]
+        public required Address Address { get; set; }
 
     }
 }
