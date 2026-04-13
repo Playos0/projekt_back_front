@@ -1,15 +1,16 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
+using WebApplication1.Models;
 using WebApplication1.Services.Interfaces;
 
 namespace WebApplication1.Services
 {
     public class PasswordService: IPasswordService
     {
-        private readonly IPasswordHasher<object> _hasher;
+        private readonly IPasswordHasher<User> _hasher;
 
         //konstruktor
-        public PasswordService(IPasswordHasher<object> hasher)
+        public PasswordService(IPasswordHasher<User> hasher)
         {
             _hasher = hasher;
         }

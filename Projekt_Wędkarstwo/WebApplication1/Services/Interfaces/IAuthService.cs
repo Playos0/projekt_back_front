@@ -4,6 +4,6 @@
     {
         bool Register(string email, string password);
 
-        bool Login(string email, string password);
+        string? Login(string email, string password);
     }
 }

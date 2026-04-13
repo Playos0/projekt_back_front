@@ -2,6 +2,7 @@
 using WebApplication1.Services.Interfaces;
 using WebApplication1.Models;
 using System.Collections.Concurrent;
+using WebApplication1.Data;
 
 namespace WebApplication1.Services
 {
@@ -10,17 +11,19 @@ namespace WebApplication1.Services
         //tu będzie jakaś baza danych
         private readonly IPasswordService _passwordService;
         private readonly AppDbContext _context;
+        private readonly IJwtService _jwtService;
 
-        public AuthService(IPasswordService passwordService, AppDbContext context)
+        public AuthService(IPasswordService passwordService, AppDbContext context, IJwtService jwtService)
         {
             _passwordService = passwordService;
             _context = context;
+            _jwtService = jwtService;
         }
 
 
         public bool Register(string email, string password)
         {
-            if (_context.User.Any(u => u.Email == email))
+            if (_context.Users.Any(u => u.Email == email))
             {
                 return false;
             }
@@ -34,22 +37,26 @@ namespace WebApplication1.Services
                 HashedPassword = hashedPassword
             };
     
-            _context.User.Add(newUser);
+            _context.Users.Add(newUser);
             _context.SaveChanges();
 
             return true; // Rejestracja udana
         }
 
-        public bool Login(string email, string password)
+        public string? Login(string email, string password)
         {
-            var user = _context.User.FirstOrDefault(user => user.Email == email);
+            var user = _context.Users.FirstOrDefault(user => user.Email == email);
             if (user == null) 
             {
-                return false;
+                return null;
             }
 
-            return _passwordService.VerifyPassword(password, user.HashedPassword);
+            if(!_passwordService.VerifyPassword(password, user.HashedPassword))
+            {
+                return null;
+            }
 
+            return _jwtService.GenerateToken(user);
         }
 
     }
