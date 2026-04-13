@@ -46,8 +46,9 @@ NA 100% NA TERAZ:
 
 -Pozwolenia
 
--klienci 
+-zamowienie
 
+-Użytkownik
 
 relacje:
 
