@@ -29,9 +29,6 @@ namespace WebApplication1.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -47,6 +44,41 @@ namespace WebApplication1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.User", b =>
+                {
+                    b.OwnsOne("WebApplication1.Models.Address", "Address", b1 =>
+                        {
+                            b1.Property<int>("UserId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("HouseNumber")
+                                .IsRequired()
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("PostalCode")
+                                .IsRequired()
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasColumnType("longtext");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("Users");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.Navigation("Address")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

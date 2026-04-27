@@ -23,7 +23,7 @@ namespace WebApplication1.Controllers
         {   
             var email = dto.Email.ToLowerInvariant();
 
-            var result = _authService.Register(email, dto.Password);
+            var result = _authService.Register(dto);
 
             if (!result)
             {
