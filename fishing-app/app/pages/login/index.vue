@@ -40,6 +40,9 @@ const handleLogin = async () => {
       ></v-text-field>
 
       <v-btn class="mt-2" type="submit" block>Submit</v-btn>
+      <div class="mt-2">
+        Don't have an account yet? <nuxt-link to="/register">Register here!</nuxt-link>
+      </div>
     </v-form>
   </v-sheet>
 </template>
