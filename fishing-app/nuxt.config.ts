@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt'],
 
   css: [
+    '~/assets/css/main.css',
     'vuetify/styles',
     '@mdi/font/css/materialdesignicons.css'
   ],

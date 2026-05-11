@@ -5,8 +5,9 @@ import { Icon } from "@iconify/vue";
 <template>
   <nav class="navbarBottom">
     <div class="menu">
-      <Icon icon="mdi:storefront-outline" />
-      Sklep <Icon icon="mdi:chevron-down" />
+      <Icon class="navItem" icon="mdi:storefront-outline" />
+      Sklep
+      <Icon icon="mdi:chevron-down" />
       <div class="dropdown">
         <NuxtLink class="navItem" to="/rods">Wędki</NuxtLink>
         <NuxtLink class="navItem" to="/reels">Kołowrotki</NuxtLink>
@@ -31,7 +32,7 @@ import { Icon } from "@iconify/vue";
 
 <style scoped>
 .navbarBottom {
-  background-color: #112a2d;
+  background-color: #353535;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -43,20 +44,31 @@ import { Icon } from "@iconify/vue";
 a {
   color: #f1f1f1;
   text-decoration: none;
+  font-size: 20px;
+  transition: color 0.3s;
 }
 a:hover {
-  color: #78c0a8;
+  color: orange;
 }
 .menu {
   position: relative;
   cursor: pointer;
   padding: 10px 0;
 }
+.menu:hover {
+  color: orange;
+}
+.menu svg {
+  font-size: 20px;
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  color: orange;
+}
+
 .dropdown {
   position: absolute;
-  background-color: #112a2d;
-  top: 90%;
-  left: 0;
+  background-color: #353535;
   padding: 10px;
   border-radius: 5px;
   min-width: 150px;
@@ -76,5 +88,8 @@ a:hover {
 }
 .navItem svg {
   margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  color: orange;
 }
 </style>
