@@ -1,10 +1,12 @@
 ﻿using WebApplication1.Data;
 using WebApplication1.Models.DTOs;
 using WebApplication1.Models;
+using WebApplication1.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Services
 {
-    public class ProductService
+    public class ProductService: IProductService
     {
         public readonly AppDbContext _context;
 
@@ -13,9 +15,9 @@ namespace WebApplication1.Services
             _context = context;
         }
 
-        Task<IEnumerable<ProductResponseDto>> GetAllProductsAsync()
+        public async Task<IEnumerable<ProductResponseDto>> GetAllProductsAsync()
         {
-            var products = _context.Products.Select(p => new ProductResponseDto
+            return await _context.Products.Select(p => new ProductResponseDto
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -24,13 +26,12 @@ namespace WebApplication1.Services
                 ImageUrl = p.ImageUrl,
                 Price = p.Price,
                 Stock = p.Stock
-            });
-            return Task.FromResult(products.AsEnumerable());
+            }).ToListAsync();
         }
 
-        Task<ProductResponseDto?> GetProductByIdAsync(int id)
+        public async Task<ProductResponseDto?> GetProductByIdAsync(int id)
         {
-            var product = _context.Products.Where(p => p.Id == id).Select(p => new ProductResponseDto
+            return await _context.Products.Where(p => p.Id == id).Select(p => new ProductResponseDto
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -39,12 +40,11 @@ namespace WebApplication1.Services
                 ImageUrl = p.ImageUrl,
                 Price = p.Price,
                 Stock = p.Stock
-            }).FirstOrDefault();
+            }).FirstOrDefaultAsync();
 
-            return Task.FromResult(product);
         }
 
-        Task<ProductResponseDto> CreateProductAsync(CreateProductDto dto)
+        public async Task<ProductResponseDto> CreateProductAsync(CreateProductDto dto)
         {
             var product = new Product
             {
@@ -57,9 +57,9 @@ namespace WebApplication1.Services
             };
 
             _context.Products.Add(product);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
-            return Task.FromResult(new ProductResponseDto
+            return new ProductResponseDto
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -68,7 +68,7 @@ namespace WebApplication1.Services
                 ImageUrl = product.ImageUrl,
                 Price = product.Price,
                 Stock = product.Stock
-            });
+            };
         }
     }
 }
