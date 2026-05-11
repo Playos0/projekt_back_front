@@ -24,12 +24,11 @@ namespace WebApplication1.Models.DTOs
         public string? ImageUrl { get; set; }
 
         [Required]
-        [MinLength(3)]
-        [MaxLength(6)]
+        [Range(0.01, 9999.99)]
         public required decimal Price { get; set; }
 
         [Required]
-        [MaxLength(3)]
+        [Range(0, 999)]
         public required int Stock { get; set; }
     }
 }
