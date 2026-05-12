@@ -3,6 +3,7 @@ using WebApplication1.Services.Interfaces;
 using WebApplication1.Models;
 using System.Collections.Concurrent;
 using WebApplication1.Data;
+using WebApplication1.Models.DTOs;
 
 namespace WebApplication1.Services
 {
@@ -21,20 +22,27 @@ namespace WebApplication1.Services
         }
 
 
-        public bool Register(string email, string password)
+        public bool Register(RegisterRequestDto dto)
         {
-            if (_context.Users.Any(u => u.Email == email))
+            if (_context.Users.Any(u => u.Email == dto.Email))
             {
                 return false;
             }
 
-            var hashedPassword = _passwordService.HashPassword(password);
+            var hashedPassword = _passwordService.HashPassword(dto.Password);
 
             var newUser = new User
             {
-                Name = email,
-                Email = email,
-                HashedPassword = hashedPassword
+                Name = dto.Name,
+                Email = dto.Email,
+                HashedPassword = hashedPassword,
+                Address = new Address
+                {
+                    City = dto.Address.City,
+                    Street = dto.Address.Street,
+                    HouseNumber = dto.Address.HouseNumber,
+                    PostalCode = dto.Address.PostalCode
+                }
             };
     
             _context.Users.Add(newUser);

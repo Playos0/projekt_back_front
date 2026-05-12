@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication1.Models
+namespace WebApplication1.Models.DTOs
 {
-    public class User
+    public class UserMeResponseDto
     {
-        public int Id { get; set; }
+        [Required]
+        public required string Id { get; set; }
 
         [Required]
         public required string Name { get; set; }
@@ -13,11 +14,7 @@ namespace WebApplication1.Models
         [EmailAddress]
         public required string Email { get; set; }
 
-       [Required]  
-        public required string HashedPassword { get; set; }
-
         [Required]
-        public required Address Address { get; set; }
-
+        public required AddressDto Address { get; set; }
     }
 }
