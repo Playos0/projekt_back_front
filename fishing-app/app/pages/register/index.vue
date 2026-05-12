@@ -32,30 +32,19 @@ const passwordConfirmIcon= ref(false)
     ]
 
 function test() {
-
   alert("Form submitted!");
 }
 function icon1(){
-  alert("Icon clicked!111");
-  
-  if(emailIcon.value === true){
+  emailIcon.value = true
     
-
-  }
 }
 function icon2(){
-  alert("Icon clicked!222");
   passwordIcon.value = true;
-  if(passwordIcon.value === true){
-    alert("Password icon is now true!");
-  }
+ 
 }
 function icon3(){
-  alert("Icon clicked!333");
   passwordConfirmIcon.value = true;
-  if(passwordConfirmIcon.value === true){
-    alert("Password Confirm icon is now true!");
-  }
+ 
 
 }
 //Email Icon
@@ -65,14 +54,16 @@ function icon3(){
 */
 </script>
 
-<template>
-  <v-form v-model="valid">
+<template v-slot:append-inner>
+  <div class="d-flex flex-row w-full fill-height">
+  <div class=" bg-grey-lighten-1 height-max w-33 height-full">Boczny pasek</div>
+  <v-form class="" v-model="valid">
 
     <v-container>
-      <h1>Creating new account</h1>
+      <h1 class="text-center">Creating new account</h1>
 
       <!-- Use v-row instead of div for Vuetify columns -->
-      <v-row class="flex flex-column border-thin rounded-lg p-4 bg-grey-lighten-1 text-center max-w-sm">
+      <v-row class="flex flex-column border-thin rounded-lg p-4 text-center max-w-sm ma-2 ">
         <v-col cols="12" md="4" >
           <v-text-field @click="icon1"
           
@@ -81,8 +72,12 @@ function icon3(){
             label ="E-mail" 
             placeholder="Enter your e-mail"
             required  
+            @focus="emailIcon = true" 
+            @blur="emailIcon = false"
            
-            ><Icon icon="streamline:send-email-solid" width="14" height="14" /></v-text-field>
+            ><Icon
+            v-if="emailIcon"
+            icon="streamline:send-email-solid" width="14" height="14" /></v-text-field>
           
         </v-col>
 
@@ -94,8 +89,12 @@ function icon3(){
             :rules="passwordRules"
             label="Password"
             required
+               @focus="passwordIcon = true" 
+            @blur="passwordIcon = false"
             
-          ><Icon icon="solar:lock-password-bold" width="24" height="24" /></v-text-field>
+          ><Icon
+            v-if="passwordIcon"
+            icon="solar:lock-password-bold" width="24" height="24" /></v-text-field>
         </v-col>
 
         <v-col cols="12" md="4">
@@ -106,8 +105,11 @@ function icon3(){
             :rules="passwordConfirmRules"
             label="Confirm Password"
             required
-             
-          ><Icon icon="solar:lock-password-bold" width="24" height="24" /></v-text-field>
+             @focus="passwordConfirmIcon = true" 
+            @blur="passwordConfirmIcon = false"
+          ><Icon
+            v-if="passwordConfirmIcon"
+            icon="solar:lock-password-bold" width="24" height="24" /></v-text-field>
         </v-col>
 
         <v-col cols="12">
@@ -116,4 +118,5 @@ function icon3(){
       </v-row>
     </v-container>  
   </v-form>
+  </div>
 </template>
