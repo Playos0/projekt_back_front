@@ -10,5 +10,10 @@ export default defineEventHandler(() => {
       alt: "Wielki szczupak",
       title: "Szczupak to KRÓl WÓD!",
     },
+    {
+      src: "/images/fishingBox.jpg",
+      alt: "Wielki szczupak",
+      title: "Szczupak to KRÓl WÓD!",
+    },
   ];
 });
