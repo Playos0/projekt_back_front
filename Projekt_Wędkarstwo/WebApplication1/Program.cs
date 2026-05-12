@@ -60,6 +60,8 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 //Serwis do JWT
 builder.Services.AddScoped<IJwtService, JwtService>();
 
+builder.Services.AddScoped<IProductService, ProductService>();
+
 //tutaj dodanie CORS
 builder.Services.AddCors(options =>
 {
