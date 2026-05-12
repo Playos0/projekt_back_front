@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using WebApplication1.Models;
 using WebApplication1.Models.DTOs;
+using WebApplication1.Services;
 using WebApplication1.Services.Interfaces;
 
 
@@ -37,6 +38,20 @@ namespace WebApplication1.Controllers
 
             return Ok(product);
         }
+
+        [HttpGet("GetProductsByCategory/{category}")]
+        public async Task<IActionResult> GetProeductByCategory(string category, [FromServices] IProductService productService)
+        {
+            var products = await productService.GetProductsByCategoryAsync(category);
+
+            if (products == null || !products.Any())
+            {
+                return NotFound($"No product in {category} category found");
+            }
+
+            return Ok(products);
+        }
+
 
         [HttpPost("CreateProduct")]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto dto, [FromServices] IProductService productService)

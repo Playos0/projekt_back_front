@@ -6,6 +6,7 @@ namespace WebApplication1.Services.Interfaces
     {
         Task<IEnumerable<ProductResponseDto>> GetAllProductsAsync();
         Task<ProductResponseDto?> GetProductByIdAsync(int id);
+        Task<IEnumerable<ProductResponseDto>> GetProductsByCategoryAsync(string category);
         Task<ProductResponseDto> CreateProductAsync(CreateProductDto dto); 
     }
 }

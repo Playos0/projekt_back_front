@@ -44,6 +44,22 @@ namespace WebApplication1.Services
 
         }
 
+        public async Task<IEnumerable<ProductResponseDto>> GetProductsByCategoryAsync(string category)
+        {
+            category = category.ToLower();
+
+            return await _context.Products.Where(p => p.Category.ToLower() == category).Select(p => new ProductResponseDto
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Category = p.Category,
+                ImageUrl = p.ImageUrl,
+                Price = p.Price,
+                Stock = p.Stock
+            }).ToListAsync();
+        }
+
         public async Task<ProductResponseDto> CreateProductAsync(CreateProductDto dto)
         {
             var product = new Product
