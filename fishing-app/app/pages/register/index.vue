@@ -55,15 +55,16 @@ function icon3(){
 </script>
 
 <template v-slot:append-inner>
-  <div class="d-flex flex-row w-full fill-height">
-  <div class=" bg-grey-lighten-1 height-max w-33 height-full">Boczny pasek</div>
-  <v-form class="" v-model="valid">
+  <div class="d-flex flex-row fill-width fill-height">
+  <div class=" bg-grey-lighten-1 height-max  height-full w-33">Boczny pasek</div>
+  <div class="bg-black width-50">
+  <v-form  v-model="valid">
 
-    <v-container>
+    <v-container >
       <h1 class="text-center">Creating new account</h1>
 
       <!-- Use v-row instead of div for Vuetify columns -->
-      <v-row class="flex flex-column border-thin rounded-lg p-4 text-center max-w-sm ma-2 ">
+      <v-row class="flex flex-column border-thin rounded-lg p-4 text-center max-w-sm ma-2 bg-grey-lighten-5">
         <v-col cols="12" md="4" >
           <v-text-field @click="icon1"
           
@@ -118,5 +119,6 @@ function icon3(){
       </v-row>
     </v-container>  
   </v-form>
+  </div>
   </div>
 </template>
