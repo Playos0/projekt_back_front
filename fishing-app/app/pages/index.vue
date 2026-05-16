@@ -32,6 +32,7 @@ const paginatedGrids = computed(() => {
     <h2 class="text-center font-weight-bold">Polecane produkty</h2>
     <v-row>
       <v-col v-for="grid in paginatedGrids" :key="grid.id" cols="12" md="4">
+        <v-card :to="'/product/' + grid.id">
         <v-card class="mx-auto" max-width="400">
           <v-img :src="grid.image" height="200px"></v-img>
           <v-card-title class="title-wrap">{{ grid.name }}</v-card-title>
@@ -52,6 +53,7 @@ const paginatedGrids = computed(() => {
               Do koszyka
             </v-btn>
           </v-card-actions>
+        </v-card>
         </v-card>
       </v-col>
     </v-row>

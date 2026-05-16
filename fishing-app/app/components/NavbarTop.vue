@@ -29,7 +29,7 @@ const cart = useCartStore();
       </NuxtLink>
       <NuxtLink class="navItem" to="/cart">
         <Icon icon="mdi:shopping-cart" />
-        Koszyk ({{ cart?.items?.length || 0 }})
+        Koszyk ({{ cart.totalQuantity || 0 }})
       </NuxtLink>
     </div>
   </nav>

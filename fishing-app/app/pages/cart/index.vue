@@ -11,7 +11,7 @@ const cart = useCartStore();
   <div v-else>
     <ul>
       <li v-for="item in cart.items" :key="item.id">
-        {{ item.name }} - {{ item.price }} PLN
+        {{ item.name }} - {{ item.price * item.quantity }} PLN Ilość: {{ item.quantity }}
         <button @click="cart.removeItem(item.id)">Usuń</button>
       </li>
     </ul>
