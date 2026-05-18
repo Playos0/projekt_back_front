@@ -7,12 +7,12 @@ namespace WebApplication1.Models
         public int Id { get; set; }
 
         [Required]
-        public required int OrderId { get; set; }
+        public int OrderId { get; set; }
 
         public Order Order { get; set; } = null!;
 
         [Required]
-        public required int ProductId { get; set; }
+        public int ProductId { get; set; }
 
         public Product Product { get; set; } = null!;
 
