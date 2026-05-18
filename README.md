@@ -4,22 +4,22 @@
 0. system logowania by ułatwić funkcjonowanie w systemie
 
 
-1. Mapka z łowiskami + kupowanie zezwoleń
-
-2. Wynajem sprzętu 
+1. Mapka z łowiskami + kupowanie zezwoleń 
 
 3. Zakup sprzętu
 
-4. Panel admina 
-
 5. Mapka z łowiskami 
-
-6. Wynajem Łodzi 
-
-7. System subskrypcji umożliwiający łowienie na różnych łowiskach i w lepszych wersjach możliwość użytkowania łodzi
 
 7.proponuje uproszczenie systemu do subskrybcji na system miesięczny/3 miesięczny/roczny
 
+do dodania Post factum:
+
+
+Panel admina
+ 
+Wynajem Łodzi
+
+Wynajem sprzętu
 
 ++++do ustalenia
 
