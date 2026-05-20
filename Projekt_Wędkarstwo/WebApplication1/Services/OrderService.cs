@@ -63,18 +63,19 @@ namespace WebApplication1.Services
 
                 product.Stock -= item.Quantity;
             }
-                var order = new Order
-                {
-                    UserId = user.Id,
-                    TotalPrice = totalPrice,
-                    CreatedAt = DateTime.UtcNow,
-                    Status = "Pending",
-                    OrderItems = orderItems
-                };
 
-                _context.Orders.Add(order);
+            var order = new Order
+            {
+                UserId = user.Id,
+                TotalPrice = totalPrice,
+                CreatedAt = DateTime.UtcNow,
+                Status = "Pending",
+                OrderItems = orderItems
+            };
 
-                await _context.SaveChangesAsync();
+            _context.Orders.Add(order);
+
+            await _context.SaveChangesAsync();
 
             return new OrderResponseDto
             {
