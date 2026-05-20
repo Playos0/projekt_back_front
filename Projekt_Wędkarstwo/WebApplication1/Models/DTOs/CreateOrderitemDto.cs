@@ -5,7 +5,7 @@ namespace WebApplication1.Models.DTOs
     public class CreateOrderitemDto
     {
         [Required]
-        public required int ItemId { get; set; }
+        public required int ProductId { get; set; }
 
         [Required]
         [Range(1,100)]
