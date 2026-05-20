@@ -44,12 +44,13 @@ namespace WebApplication1.Services
 
                 if (product == null)
                 {
-                    throw new Exception($"Product with ID {item.ProductId} not found");
+                    throw new InvalidOperationException($"Product with ID {item.ProductId} not found");
+                   
                 }
 
                 if (product.Stock < item.Quantity)
                 {
-                    throw new Exception($"Not enough stock for product {product.Name}");
+                    throw new InvalidOperationException($"Not enough stock for product {product.Name}");
                 }
 
                 totalPrice += product.Price * item.Quantity;
