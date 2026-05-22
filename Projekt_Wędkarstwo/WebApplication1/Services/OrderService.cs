@@ -88,6 +88,62 @@ namespace WebApplication1.Services
             
         }
 
- 
+        public async Task<IEnumerable<OrderResponseDto>> GetMyOrdersAsync(ClaimsPrincipal userClaims)
+        {
+            var email = userClaims.FindFirstValue(ClaimTypes.Email);
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            var orders = await _context.Orders.Where(o => o.UserId == user.Id)
+                .Select(o => new OrderResponseDto
+                {
+                    OrderId = o.Id,
+                    CreatedAt = o.CreatedAt,
+                    Status = o.Status,
+                    TotalPrice = o.TotalPrice
+                }).ToListAsync();
+
+            return orders;
+        }
+
+        public async Task<OrderDetailsDto?> GetOrderByIdAsync(int orderId, ClaimsPrincipal userClaims)
+        {
+            var email = userClaims.FindFirstValue(ClaimTypes.Email);
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+            if(user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            var order = await _context.Orders
+                .Where(o => o.Id == orderId && o.UserId == user.Id)
+                .Select(order => new OrderDetailsDto
+                {
+                    OrderId = order.Id,
+                    CreatedAt = order.CreatedAt,
+                    Status = order.Status,
+                    TotalPrice = order.TotalPrice,
+
+                    Items = order.OrderItems.Select(oi => new OrderItemResponseDto
+                    {
+                        ProductId = oi.ProductId,
+                        ProductName = oi.Product.Name,
+                        Quantity = oi.Quantity,
+                        UnitPrice = oi.UnitPrice
+                    }).ToList()
+
+                }).FirstOrDefaultAsync();
+            
+            return order;   
+
+
+        }
     }
 }
