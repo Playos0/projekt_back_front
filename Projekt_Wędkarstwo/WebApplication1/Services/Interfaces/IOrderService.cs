@@ -9,6 +9,6 @@ namespace WebApplication1.Services.Interfaces
 
         Task <IEnumerable<OrderResponseDto>> GetMyOrdersAsync (ClaimsPrincipal userClaims);
 
-        
+        Task <OrderDetailsDto?> GetOrderByIdAsync (int orderId, ClaimsPrincipal userClaims);
     }
 }
