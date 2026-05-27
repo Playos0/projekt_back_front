@@ -31,9 +31,28 @@ namespace WebApplication1.Controllers
                 return BadRequest(new { message = ex.Message });
             }
 
-
-            
         }
 
+        [HttpGet("my")]
+        [Authorize]
+        public async Task<IActionResult> GetMyOrders([FromServices] IOrderService orderService)
+        {
+            var orders = await orderService.GetMyOrdersAsync(User);
+            return Ok(orders);
+        }
+
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<IActionResult> GetOrderByID(int id, [FromServices] IOrderService orderService)
+        {
+            var order = await orderService.GetOrderByIdAsync(id, User);
+
+            if(order == null)
+            {
+                return NotFound("Order not found or you do not have access to it.");
+            }
+
+            return Ok(order);
+        }
     }
 }
