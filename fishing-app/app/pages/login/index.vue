@@ -3,14 +3,21 @@ import { ref } from "vue";
 const form = ref();
 const email = ref("");
 const password = ref("");
+//email validation rules: required and must be a valid email format
+//Email(LoginRequestDto.cs)
 const emailRules = [
   (v: string) => !!v || "Email is required",
   (v: string) => /.+@.+\..+/.test(v) || "Email must be valid",
 ];
+// Password validation rules
+//Password(LoginRequestDto.cs)
+//string Password { get; set; }
+
 const passwordRules = [
   (v: string) => !!v || "Password is required",
   (v: string) => v.length >= 6 || "Password must be at least 6 characters",
 ];
+
 const handleLogin = async () => {
   const isValid = await form.value.validate();
   if (isValid) {
