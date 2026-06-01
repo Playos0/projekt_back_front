@@ -9,6 +9,10 @@ namespace WebApplication1.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<FishingSpot> FishingSpots { get; set; }
+        public DbSet<FishingPass> fishingPasses { get; set; }
+        public DbSet<SubscriptionPlan> subscriptionPlans { get; set; }
+        public DbSet<UserSubscription> userSubscriptions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
