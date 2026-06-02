@@ -4,7 +4,7 @@ namespace WebApplication1.Models
 {
     public class FishingSpot
     {
-        int Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public required string Name { get; set; }

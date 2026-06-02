@@ -1,24 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication1.Models
+namespace WebApplication1.Models.DTOs
 {
-    public class FishingPass
+    public class FishingPassDto
     {
         public int Id { get; set; }
 
         [Required]
-        public required int UserId { get; set; }
-
-        public User User { get; set; } = null!;
-
-        [Required]
-        public required int FishingSpotId { get; set; }
-
-        public FishingSpot FishingSpot { get; set; } = null!;
+        public required string FishingSpotName { get; set; }
 
         [Required]
         public required DateTime ValidDate { get; set; }
-
+        
         [Required]
         public required decimal Price { get; set; }
 
