@@ -65,6 +65,9 @@ builder.Services.AddScoped<IProductService, ProductService>();
 //Serwis do zamówień
 builder.Services.AddScoped<IOrderService, OrderService>();
 
+//serwis do wejściówek
+builder.Services.AddScoped<IFishingPassService, FishingPassService>();
+
 //tutaj dodanie CORS
 builder.Services.AddCors(options =>
 {

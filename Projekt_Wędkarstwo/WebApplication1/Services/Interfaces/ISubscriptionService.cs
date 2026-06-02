@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using WebApplication1.Models;
+using WebApplication1.Models.DTOs;
 
 namespace WebApplication1.Services.Interfaces
 {

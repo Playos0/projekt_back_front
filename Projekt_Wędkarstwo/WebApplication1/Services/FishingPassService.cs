@@ -3,10 +3,11 @@ using System.Security.Claims;
 using WebApplication1.Data;
 using WebApplication1.Models;
 using WebApplication1.Models.DTOs;
+using WebApplication1.Services.Interfaces;
 
 namespace WebApplication1.Services
 {
-    public class FishingPassService
+    public class FishingPassService: IFishingPassService
     {
         public readonly AppDbContext _context;
 
