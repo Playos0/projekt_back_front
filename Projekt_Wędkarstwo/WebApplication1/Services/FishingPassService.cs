@@ -31,7 +31,7 @@ namespace WebApplication1.Services
 
             if (spot == null)
             {
-                throw new Exception("Fishing spot not found");
+                throw new InvalidOperationException("Fishing spot not found");
             }
 
             var pass = new FishingPass
