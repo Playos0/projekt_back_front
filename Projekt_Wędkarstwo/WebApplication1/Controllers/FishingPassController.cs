@@ -16,7 +16,7 @@ namespace WebApplication1.Controllers
             _fishingPassService = fishingPassService;
         }
 
-        [HttpGet("buy")]
+        [HttpPost("buy")]
         public async Task<IActionResult> BuyPass([FromBody] BuyFishingPassDto dto)
         {
             await _fishingPassService.BuyPassAsync(dto, User);

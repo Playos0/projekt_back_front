@@ -14,8 +14,7 @@ namespace WebApplication1.Models
         [Required]
         public required string Location { get; set; }
 
-        [Required]
-        public required bool SubscriptionAvailable { get; set; }
+        public bool SubscriptionAvailable { get; set; }
 
         [Required]
         public required decimal DayPassPrice { get; set; }

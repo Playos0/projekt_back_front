@@ -46,6 +46,47 @@ namespace WebApplication1.Data
             modelBuilder.Entity<OrderItem>()
                 .Property(oi => oi.UnitPrice)
                 .HasPrecision(18, 2);
+
+
+            //strefa do pass i sub
+            modelBuilder.Entity<FishingPass>()
+                .HasOne(fp => fp.FishingSpot)
+                .WithMany()
+                .HasForeignKey(fp => fp.FishingSpotId);
+
+            modelBuilder.Entity<FishingPass>()
+                .HasOne(fp => fp.User)
+                .WithMany()
+                .HasForeignKey(fp => fp.UserId);
+
+            modelBuilder.Entity<SubscriptionPlan>()
+                .HasOne(sp => sp.FishingSpot)
+                .WithMany()
+                .HasForeignKey(sp => sp.FishingSpotId);
+
+            modelBuilder.Entity<UserSubscription>()
+                .HasOne(us => us.SubscriptionPlan)
+                .WithMany()
+                .HasForeignKey(us => us.SubscriptionPlanId);
+
+            modelBuilder.Entity<UserSubscription>()
+                .HasOne(us => us.User)
+                .WithMany()
+                .HasForeignKey(us => us.UserId);
+
+            modelBuilder.Entity<FishingSpot>()
+                .Property(f => f.DayPassPrice)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<SubscriptionPlan>()
+                .Property(sp => sp.Price)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<FishingPass>()
+                .Property(fp => fp.Price)
+                .HasPrecision(18, 2);
+
+            base.OnModelCreating(modelBuilder);
         }
 
         public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
