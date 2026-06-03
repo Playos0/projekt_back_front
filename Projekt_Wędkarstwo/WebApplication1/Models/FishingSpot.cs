@@ -19,10 +19,8 @@ namespace WebApplication1.Models
         [Required]
         public required decimal DayPassPrice { get; set; }
 
-        [Required]
-        public required decimal latitude { get; set; }
+        public required decimal Latitude { get; set; }
 
-        [Required]
-        public required decimal longitude { get; set; }
+        public required decimal Longitude { get; set; }
     }
 }
