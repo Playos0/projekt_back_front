@@ -9,7 +9,6 @@ namespace WebApplication1.Services
 {
     public class AuthService: IAuthService
     {
-        //tu będzie jakaś baza danych
         private readonly IPasswordService _passwordService;
         private readonly AppDbContext _context;
         private readonly IJwtService _jwtService;
