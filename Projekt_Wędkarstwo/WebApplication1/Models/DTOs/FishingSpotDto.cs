@@ -19,5 +19,9 @@ namespace WebApplication1.Models.DTOs
 
         [Required]
         public required bool SubscriptionAvailable { get; set; }
+
+        public required decimal Latitude { get; set; }
+
+        public required decimal Longitude { get; set; }
     }
 }

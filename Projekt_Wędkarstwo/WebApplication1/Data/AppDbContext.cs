@@ -86,6 +86,15 @@ namespace WebApplication1.Data
                 .Property(fp => fp.Price)
                 .HasPrecision(18, 2);
 
+            //do łowsisk długość i szerokość
+            modelBuilder.Entity<FishingSpot>()
+                .Property(f => f.Latitude)
+                .HasPrecision(9, 6);
+
+            modelBuilder.Entity<FishingSpot>()
+                .Property(f => f.Longitude)
+                .HasPrecision(9, 6);
+
             base.OnModelCreating(modelBuilder);
         }
 
