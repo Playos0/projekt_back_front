@@ -3,6 +3,8 @@ import { ref } from "vue";
 const form = ref();
 const email = ref("");
 const password = ref("");
+const responsetoken = ref(false);
+
 //email validation rules: required and must be a valid email format
 //Email(LoginRequestDto.cs)
 const emailRules = [
@@ -19,15 +21,48 @@ const passwordRules = [
 ];
 
 const handleLogin = async () => {
-  const isValid = await form.value.validate();
-  if (isValid) {
-    // Handle login logic here
-    console.log("Email:", email.value);
-    console.log("Password:", password.value);
-  } else {
-    console.log("Form is invalid");
-  }
+  const { valid } = await form.value.validate();
+  
+  if (valid) {
+    try {
+     
+      const response = await $fetch<{ token: string }>('http://localhost:5004/api/Auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: {
+          email: email.value,
+          password: password.value,
+        },
+      });
+
+      
+      const tokenCookie = useCookie('auth_token', { 
+        maxAge: 60 * 60 * 24, // valid 24 h
+        sameSite: 'lax',      
+        secure: false      
+      });
+
+  
+      if (response && response.token) {
+        tokenCookie.value = response.token;
+        
+      
+        console.log("Przechwycony token z API:", response.token);
+       
+      } 
+
+    } catch (error: any) {
+      console.error("auth error", error);
+      const errorMessage = error.data?.message || "Wrong email/password";
+      alert(`${errorMessage}`);
+    }
+  } 
 };
+
+
+
 </script>
 
 <template>
