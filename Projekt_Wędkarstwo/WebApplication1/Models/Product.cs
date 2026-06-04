@@ -11,15 +11,16 @@ namespace WebApplication1.Models
 
         public string? Description { get; set; }
 
-        public string? Category { get; set; }
+        [Required]
+        public required string Category { get; set; }
+
+        [Required]
+        public decimal Price { get; set; }
+
+        [Required]
+        public int Stock { get; set; }
 
         public string? ImageUrl { get; set; }
-
-        [Required]
-        public required decimal Price { get; set; }
-
-        [Required]
-        public required int Stock { get; set; }
 
     }
 }

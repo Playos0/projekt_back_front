@@ -60,11 +60,6 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 //Serwis do JWT
 builder.Services.AddScoped<IJwtService, JwtService>();
 
-builder.Services.AddScoped<IProductService, ProductService>();
-
-//Serwis do zamówień
-builder.Services.AddScoped<IOrderService, OrderService>();
-
 //tutaj dodanie CORS
 builder.Services.AddCors(options =>
 {
@@ -120,7 +115,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors("AllowAll");
+app.UseCors();
 
 app.MapControllers();
 
