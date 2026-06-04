@@ -25,6 +25,19 @@ namespace WebApplication1.Controllers
             return Ok(products);
         }
 
+        [HttpGet("GetProductsByCategory/{category}")]
+        public async Task<IActionResult> GetProductsByCategory(string category, [FromServices] IProductService productService)
+        {
+            var products = await productService.GetProductsByCategoryAsync(category);
+
+            if (products == null || !products.Any())
+            {
+                return NotFound($"No products found in category '{category}'.");
+            }
+
+            return Ok(products);
+        }
+
         [HttpGet("GetProductById/{id}")]
         public async Task<IActionResult> GetProductById(int id, [FromServices] IProductService productService)
         {

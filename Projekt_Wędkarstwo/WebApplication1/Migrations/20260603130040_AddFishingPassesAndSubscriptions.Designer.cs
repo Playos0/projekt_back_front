@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication1.Data;
 
@@ -11,9 +12,11 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260603130040_AddFishingPassesAndSubscriptions")]
+    partial class AddFishingPassesAndSubscriptions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,15 +73,9 @@ namespace WebApplication1.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
 
-                    b.Property<decimal>("Latitude")
-                        .HasColumnType("decimal(65,30)");
-
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<decimal>("Longitude")
-                        .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("Name")
                         .IsRequired()
