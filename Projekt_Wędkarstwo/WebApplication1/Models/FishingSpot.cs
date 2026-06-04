@@ -1,0 +1,26 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebApplication1.Models
+{
+    public class FishingSpot
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public required string Name { get; set; }
+
+        public string? Description { get; set; }
+
+        [Required]
+        public required string Location { get; set; }
+
+        public bool SubscriptionAvailable { get; set; }
+
+        [Required]
+        public required decimal DayPassPrice { get; set; }
+
+        public required decimal Latitude { get; set; }
+
+        public required decimal Longitude { get; set; }
+    }
+}

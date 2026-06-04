@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication1.Data;
 
@@ -11,9 +12,11 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260518183924_InitShop")]
+    partial class InitShop
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,76 +24,6 @@ namespace WebApplication1.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
-
-            modelBuilder.Entity("WebApplication1.Models.FishingPass", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("FishingSpotId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("PurchaseDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ValidDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FishingSpotId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("FishingPasses");
-                });
-
-            modelBuilder.Entity("WebApplication1.Models.FishingSpot", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("DayPassPrice")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("longtext");
-
-                    b.Property<decimal>("Latitude")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<decimal>("Longitude")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("SubscriptionAvailable")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FishingSpots");
-                });
 
             modelBuilder.Entity("WebApplication1.Models.Order", b =>
                 {
@@ -184,35 +117,6 @@ namespace WebApplication1.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.SubscriptionPlan", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DurationInDays")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FishingSpotId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<decimal>("Price")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FishingSpotId");
-
-                    b.ToTable("SubscriptionPlans");
-                });
-
             modelBuilder.Entity("WebApplication1.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -236,54 +140,6 @@ namespace WebApplication1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("WebApplication1.Models.UserSubscription", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("SubscriptionPlanId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubscriptionPlanId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserSubscriptions");
-                });
-
-            modelBuilder.Entity("WebApplication1.Models.FishingPass", b =>
-                {
-                    b.HasOne("WebApplication1.Models.FishingSpot", "FishingSpot")
-                        .WithMany()
-                        .HasForeignKey("FishingSpotId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebApplication1.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("FishingSpot");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Order", b =>
@@ -314,17 +170,6 @@ namespace WebApplication1.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("WebApplication1.Models.SubscriptionPlan", b =>
-                {
-                    b.HasOne("WebApplication1.Models.FishingSpot", "FishingSpot")
-                        .WithMany()
-                        .HasForeignKey("FishingSpotId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("FishingSpot");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.User", b =>
@@ -360,25 +205,6 @@ namespace WebApplication1.Migrations
 
                     b.Navigation("Address")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("WebApplication1.Models.UserSubscription", b =>
-                {
-                    b.HasOne("WebApplication1.Models.SubscriptionPlan", "SubscriptionPlan")
-                        .WithMany()
-                        .HasForeignKey("SubscriptionPlanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebApplication1.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SubscriptionPlan");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Order", b =>
