@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Services
 {
-    public class ProductService: IProductService
+    public class ProductService : IProductService
     {
         public readonly AppDbContext _context;
 
@@ -83,6 +83,50 @@ namespace WebApplication1.Services
                 Price = product.Price,
                 Stock = product.Stock
             };
+        }
+
+        public async Task<ProductResponseDto?> UpdateProductAsync(UpdateProductDto dto, int id)
+        {
+            var productToUpdate = await _context.Products.FindAsync(id);
+
+            if (productToUpdate == null)
+            {
+                return null;
+            }
+
+            productToUpdate.Name = dto.Name;
+            productToUpdate.Description = dto.Description;
+            productToUpdate.Category = dto.Category;
+            productToUpdate.ImageUrl = dto.ImageUrl;
+            productToUpdate.Price = dto.Price;
+            productToUpdate.Stock = dto.Stock;
+
+            await _context.SaveChangesAsync();
+
+            return new ProductResponseDto
+            {
+                Id = productToUpdate.Id,
+                Name = productToUpdate.Name,
+                Description = productToUpdate.Description,
+                Category = productToUpdate.Category,
+                ImageUrl = productToUpdate.ImageUrl,
+                Price = productToUpdate.Price,
+                Stock = productToUpdate.Stock
+            };
+
+
+        }
+
+        public async Task<bool> DeleteProductAsync(int id)
+        {
+            var productToDelete = await _context.Products.FindAsync(id);
+            if (productToDelete == null)
+            {
+                return false;
+            }
+            _context.Products.Remove(productToDelete);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

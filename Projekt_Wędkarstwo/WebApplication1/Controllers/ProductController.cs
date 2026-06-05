@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using WebApplication1.Models;
 using WebApplication1.Models.DTOs;
+using WebApplication1.Services;
 using WebApplication1.Services.Interfaces;
 
 
@@ -43,7 +45,7 @@ namespace WebApplication1.Controllers
         {
             var product = await productService.GetProductByIdAsync(id);
 
-            if(product == null)
+            if (product == null)
             {
                 return NotFound($"Product with ID {id} not found");
             }
@@ -52,6 +54,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost("CreateProduct")]
+        [Authorize]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto dto, [FromServices] IProductService productService)
         {
             if (!ModelState.IsValid)
@@ -63,5 +66,46 @@ namespace WebApplication1.Controllers
             return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.Id }, createdProduct);
         }
 
+        [HttpPut("{id}")]
+        [Authorize]
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] UpdateProductDto dto, [FromServices] IProductService productService)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var result = await productService.UpdateProductAsync(dto, id);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error while updating product {ex.Message}");
+
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<IActionResult> Delete(int id, [FromServices] IProductService productService)
+        {
+            try
+            {
+                var result = await productService.DeleteProductAsync(id);
+
+                if (!result)
+                    return NotFound($"Product with ID {id} not found");
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error while deleting product: {ex.Message}");
+            }
+
+        }
     }
 }

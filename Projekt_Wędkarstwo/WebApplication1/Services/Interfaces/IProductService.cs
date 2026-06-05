@@ -10,5 +10,7 @@ namespace WebApplication1.Services.Interfaces
 
         Task<ProductResponseDto?> GetProductByIdAsync(int id);
         Task<ProductResponseDto> CreateProductAsync(CreateProductDto dto); 
+        Task<ProductResponseDto?> UpdateProductAsync(UpdateProductDto dto, int id);
+        Task<bool> DeleteProductAsync(int id);
     }
 }
