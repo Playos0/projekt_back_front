@@ -60,6 +60,20 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 //Serwis do JWT
 builder.Services.AddScoped<IJwtService, JwtService>();
 
+builder.Services.AddScoped<IProductService, ProductService>();
+
+//Serwis do zamówień
+builder.Services.AddScoped<IOrderService, OrderService>();
+
+//serwis do wejściówek
+builder.Services.AddScoped<IFishingPassService, FishingPassService>();
+
+//do subskrypcji
+builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
+
+//serwis do łowisk
+builder.Services.AddScoped<IFishingSpotService, FishingSpotService>();
+
 //tutaj dodanie CORS
 builder.Services.AddCors(options =>
 {
@@ -115,7 +129,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors();
+app.UseCors("AllowAll");
 
 app.MapControllers();
 
