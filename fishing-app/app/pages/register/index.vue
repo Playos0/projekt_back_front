@@ -2,12 +2,38 @@
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
 
-const valid = ref(false);
+
+const valid = ref<boolean>(false);
+
+interface AddressStructure {
+  street: string;
+  houseNumber: string;
+  postalCode: string;
+  city: string;
+}
+
+interface RegisterForm {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+  address: AddressStructure;
+}
+
+interface FormIconsState {
+  name: boolean;
+  email: boolean;
+  password: boolean;
+  passwordConfirm: boolean;
+  address: Record<keyof AddressStructure, boolean>;
+    //keyof is forauto mapping the address fields to the icons state
+}
+
 
 // 1. data model
-const form = ref({
+const form = ref<RegisterForm>({
   name: "",
-  Email: "",
+  email: "",
   password: "",
   passwordConfirm: "", 
   address: {
@@ -19,15 +45,17 @@ const form = ref({
 });
 
 // icons in form fields 
-const Icons = ref({
+const Icons = ref<FormIconsState>({
   name: false,
   email: false,
   password: false,
   passwordConfirm: false,
+  address: {
   street: false,
   houseNumber: false,
   postalCode: false,
   city: false
+  }
 });
 // Validation rules
 const emailRules = [
@@ -107,11 +135,11 @@ async function test() {
                 label="Full Name"
                 placeholder="Enter your full name"
                 required
-                   @focus="nameIcon = true"
-                @blur="nameIcon = false">
+                   @focus="Icons.name = true"
+                @blur="Icons.name = false">
               
                 <template v-slot:append-inner>
-                  <Icon v-if="nameIcon" icon="wpf:name" width="24" height="24" />
+                  <Icon v-if="Icons.name" icon="wpf:name" width="24" height="24" />
                 </template>
                 </v-text-field>
              
@@ -123,11 +151,11 @@ async function test() {
                 label="E-mail"
                 placeholder="Enter your e-mail"
                 required
-                @focus="emailIcon = true"
-                @blur="emailIcon = false"
+                @focus="Icons.email = true"
+                @blur="Icons.email = false"
               >
                 <template v-slot:append-inner>
-                  <Icon v-if="emailIcon" icon="streamline:send-email-solid" width="20" height="20" />
+                  <Icon v-if="Icons.email" icon="streamline:send-email-solid" width="20" height="20" />
                 </template>
               </v-text-field>
             </v-col>
@@ -140,11 +168,11 @@ async function test() {
                 :rules="passwordRules"
                 label="Password"
                 required
-                @focus="passwordIcon = true"
-                @blur="passwordIcon = false"
+                @focus="Icons.password = true"
+                @blur="Icons.password = false"
               >
                 <template v-slot:append-inner>
-                  <Icon v-if="passwordIcon" icon="solar:lock-password-bold" width="24" height="24" />
+                  <Icon v-if="Icons.password" icon="solar:lock-password-bold" width="24" height="24" />
                 </template>
               </v-text-field>
             </v-col>
@@ -157,11 +185,11 @@ async function test() {
                 :rules="passwordConfirmRules"
                 label="Confirm Password"
                 required
-                @focus="passwordConfirmIcon = true"
-                @blur="passwordConfirmIcon = false"
+                @focus="Icons.passwordConfirm = true"
+                @blur="Icons.passwordConfirm = false"
               >
                 <template v-slot:append-inner>
-                  <Icon v-if="passwordConfirmIcon" icon="solar:lock-password-bold" width="24" height="24" />
+                  <Icon v-if="Icons.passwordConfirm" icon="solar:lock-password-bold" width="24" height="24" />
                 </template>
               </v-text-field>
             </v-col>
@@ -180,11 +208,11 @@ async function test() {
                 label="Street"
                 placeholder="e.g. Main Street"
                 required
-                 @focus="StreetIcon = true"
-                @blur="StreetIcon = false"
+                 @focus="Icons.address.street = true"
+                @blur="Icons.address.street = false"
                 >
                 <template v-slot:append-inner>
-                  <Icon v-if="StreetIcon" icon="fluent-mdl2:street" width="24" height="24" />
+                  <Icon v-if="Icons.address.street" icon="fluent-mdl2:street" width="24" height="24" />
                 </template>
               </v-text-field>
               
@@ -197,11 +225,11 @@ async function test() {
                 label="House / Apartment Number"
                 placeholder="e.g. 12B/4"
                 required
-                  @focus="HouseNumberIcon = true"
-                @blur="HouseNumberIcon = false"
+                  @focus="Icons.address.houseNumber = true"
+                @blur="Icons.address.houseNumber = false"
                 >
                  <template v-slot:append-inner>
-                  <Icon v-if="HouseNumberIcon" icon="material-symbols:house" width="24" height="24" />
+                  <Icon v-if="Icons.address.houseNumber" icon="material-symbols:house" width="24" height="24" />
                 </template>
               </v-text-field>
               
@@ -214,12 +242,12 @@ async function test() {
                 label="Postal Code"
                 placeholder="00-000"
                 required
-                      @focus="PostalIcon = true"
-                @blur="PostalIcon = false"
+                      @focus="Icons.address.postalCode = true"
+                @blur="Icons.address.postalCode = false"
                 style="max-width: 150px;"
               >
                 <template v-slot:append-inner>
-                  <Icon v-if="PostalIcon" icon="solar:letter-bold" width="24" height="24" />
+                  <Icon v-if="Icons.address.postalCode" icon="solar:letter-bold" width="24" height="24" />
                 </template>
               </v-text-field>
 
@@ -230,12 +258,12 @@ async function test() {
                 label="City"
                 placeholder="e.g. Warsaw"
                 required
-                       @focus="CityIcon = true"
-                @blur="CityIcon = false"
+                       @focus="Icons.address.city = true"
+                @blur="Icons.address.city = false"
                 class="flex-grow-1"
               >
                   <template v-slot:append-inner>
-                  <Icon v-if="CityIcon" icon="mdi:city" width="24" height="24" />
+                  <Icon v-if="Icons.address.city" icon="mdi:city" width="24" height="24" />
                 </template>
               </v-text-field>
             </v-col>

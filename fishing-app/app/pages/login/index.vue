@@ -3,7 +3,6 @@ import { ref } from "vue";
 
 const form = ref<any>(null);
 const login = ref({
-
 email: "",
 password: "",
 responsetoken: false
