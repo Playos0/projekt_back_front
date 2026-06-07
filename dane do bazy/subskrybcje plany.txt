@@ -1,0 +1,19 @@
+INSERT INTO subscriptionplans(FishingSpotId, Name, DurationInDays, Price) VALUES
+
+(1, 'Subskrypcja Miesięczna', 30, 200.00),
+    (1, 'Subskrypcja Roczna', 365, 1200.00),
+
+    (3, 'Karnet Sezonowy', 180, 850.00),
+    (3, 'Karnet Roczny Full', 365, 1600.00),
+
+    (5, 'Subskrypcja Miesięczna', 30, 180.00),
+    (5, 'Subskrypcja Roczna', 365, 950.00),
+
+    (7, 'Karnet Kwartalny', 90, 400.00),
+    (7, 'Karnet Roczny', 365, 1300.00),
+
+    (10, 'Karnet VIP Sezon', 120, 1400.00),
+    (10, 'Karnet VIP Roczny', 365, 2900.00),
+
+    (13, 'Subskrypcja Miesięczna', 30, 280.00),
+    (13, 'Subskrypcja Roczna', 365, 1700.00);

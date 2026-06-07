@@ -1,0 +1,16 @@
+INSERT INTO `fishingspots`(`Name`, `Description`, `Location`, `SubscriptionAvailable`, `DayPassPrice`, `Latitude`, `Longitude`) VALUES
+('Łowisko Żarnowiec', 'Duże jezioro rynnowe, znane w całej Polsce z rekordowych szczupaków i okoni.', 'Żarnowiec', TRUE, 45.00, 54.733300, 18.066700),
+    ('Łowisko Miłoszewo', 'Kultowe i wymagające łowisko karpiowe na Kaszubach z okazami przekraczającymi 30 kg.', 'Miłoszewo', FALSE, 80.00, 54.443100, 17.983200),
+    ('Łowisko Wygonin', 'Głębokie jezioro borowe w sercu lasu, raj dla zaawansowanych karpiarzy i łowców amurów.', 'Wygonin', TRUE, 90.00, 53.978100, 17.962200),
+    ('Jezioro Charzykowskie', 'Wielki akwen w Borach Tucholskich, idealny na sandacza, leszcza i węgorza.', 'Charzykowy', FALSE, 35.00, 53.766700, 17.516700),
+    ('Łowisko Giełdon', 'Kameralne łowisko komercyjne otoczone lasami, obfite w dorodne karpie oraz jesiotry.', 'Giełdon', TRUE, 50.00, 53.891200, 17.721400),
+    ('Trzy Stawy Borkowo', 'Kompleks trzech dobrze zagospodarowanych stawów blisko Trójmiasta, głównie karp i lin.', 'Borkowo', FALSE, 40.00, 54.312100, 18.523400),
+    ('Łowisko Borowo', 'Spokojna woda pośród wzgórz kaszubskich, regularnie zarybiana drapieżnikami i białą rybą.', 'Borowo', TRUE, 60.00, 54.340200, 18.261100),
+    ('Jezioro Raduńskie Dolne', 'Element Kółka Raduńskiego; czysta woda, głębokie tonie, obfitość sielawy i okonia.', 'Chmielno', FALSE, 30.00, 54.325600, 18.102300),
+    ('Łowisko Mausz', 'Duży, czysty akwen rekreacyjno-wędkarski z urozmaiconą linią brzegową.', 'Ostrów Mausz', FALSE, 40.00, 54.214500, 17.761200),
+    ('Łowisko Krążno', 'Prestiżowe, zamknięte łowisko no-kill z doskonałą infrastrukturą dla łowców okazów.', 'Krążno', TRUE, 100.00, 54.123400, 17.543200),
+    ('Łowisko Goszyn', 'Akwen komercyjny niedaleko Gdańska, świetny na szybkie, kilkugodzinne wypady na karpie.', 'Goszyn', FALSE, 55.00, 54.234100, 18.589200),
+    ('Stawy Parczewo', 'Kameralny obiekt agroturystyczny przystosowany dla rodzin i wędkarzy, pstrąg i amur.', 'Parczewo', FALSE, 45.00, 54.491200, 16.921400),
+    ('Łowisko Niebędzino', 'Dzika woda z licznymi stanowiskami rzutowymi, słynąca z dużych sumów i amurów.', 'Niebędzino', TRUE, 70.00, 54.461100, 17.652300),
+    ('Jezioro Bieszkowice', 'Malownicze leśne jezioro z czystą wodą, dobre na wiosennego szczupaka i lina.', 'Bieszkowice', FALSE, 35.00, 54.512300, 18.312100),
+    ('Jezioro Kłodno', 'Atrakcyjny akwen połączony z innymi jeziorami, świetne pomosty wędkarskie i ładny leszcz.', 'Zawory', FALSE, 38.00, 54.331200, 18.134500);
