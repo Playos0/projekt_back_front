@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
-const form = ref();
-const email = ref("");
-const password = ref("");
-const responsetoken = ref(false);
+
+const form = ref<any>(null);
+const login = ref({
+
+email: "",
+password: "",
+responsetoken: false
+})
 
 //email validation rules: required and must be a valid email format
 //Email(LoginRequestDto.cs)
@@ -22,37 +26,27 @@ const passwordRules = [
 
 const handleLogin = async () => {
   const { valid } = await form.value.validate();
-  
   if (valid) {
     try {
-     
       const response = await $fetch<{ token: string }>('http://localhost:5004/api/Auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: {
-          email: email.value,
-          password: password.value,
+          email: login.value.email,
+          password: login.value.password,
         },
       });
-
-      
       const tokenCookie = useCookie('auth_token', { 
-        maxAge: 60 * 60 * 24, // valid 24 h
+        maxAge: 3600, // valid 1 h
         sameSite: 'lax',      
-        secure: false      
+        secure:   true   
       });
-
-  
       if (response && response.token) {
         tokenCookie.value = response.token;
-        
-      
-        console.log("Przechwycony token z API:", response.token);
-       
+        console.log("Przechwycony token z API:", response.token);   
       } 
-
     } catch (error: any) {
       console.error("auth error", error);
       const errorMessage = error.data?.message || "Wrong email/password";
@@ -60,23 +54,19 @@ const handleLogin = async () => {
     }
   } 
 };
-
-
-
 </script>
-
 <template>
   <div class=" b-background border align-center d-flex flex-column fill-height justify-center ">
   <v-sheet class="border-md" width="400" height="400">
     <v-form ref="form" fast-fail @submit.prevent="handleLogin">
       <v-text-field
-        v-model="email"
+        v-model="login.email"
         :rules="emailRules"
         label="Email"
       ></v-text-field>
 
       <v-text-field
-        v-model="password"
+        v-model="login.password"
         :rules="passwordRules"
         label="Password"
         type="password"
