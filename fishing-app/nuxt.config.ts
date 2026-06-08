@@ -2,6 +2,11 @@
 export default defineNuxtConfig({
   modules: ['@pinia/nuxt'],
 
+  runtimeConfig: {
+    public: {
+      apiBase:'http://localhost:5004/api',
+    },
+  },
   css: [
     '~/assets/css/main.css',
     'vuetify/styles',
