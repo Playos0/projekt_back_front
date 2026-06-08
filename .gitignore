@@ -35,12 +35,12 @@ dist
 # Node dependencies
 node_modules
 
- #Logs
+# Logs
 logs
 *.log
 
 # Misc
-#.DS_Store
+.DS_Store
 
 # Local env files
 .env
