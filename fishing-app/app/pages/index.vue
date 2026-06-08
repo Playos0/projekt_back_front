@@ -3,12 +3,25 @@ import { useCartStore } from "~/stores/cart";
 import { ref, computed } from "vue";
 const cart = useCartStore();
 const { data: promotionSlides } = await useFetch("/api/promotionSlides");
-const { data: promotionGrids } = await useFetch("/api/promotionGrids");
+const config = useRuntimeConfig()
+
+interface Product {
+  id: number
+  name: string
+  description: string
+  category: string
+  imageUrl: string
+  stock: number
+  price: number
+}
+
+const { data: Products } = await useFetch<Product[]>(`${config.public.apiBase}/Product/GetAllProducts`)
 const currentPage = ref(1);
 const itemsPerPage = 6;
+const maxPage = ref(4);
 const paginatedGrids = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage;
-  return promotionGrids.value?.slice(start, start + itemsPerPage) || [];
+  return Products.value?.slice(start, start + itemsPerPage) || [];
 });
 </script>
 
@@ -33,7 +46,7 @@ const paginatedGrids = computed(() => {
     <v-row>
       <v-col v-for="grid in paginatedGrids" :key="grid.id" cols="12" md="4">
         <v-card :to="'/product/' + grid.id" class="mx-auto" max-width="400">
-          <v-img :src="grid.image" height="200px"></v-img>
+          <v-img :src="`/images/${grid.imageUrl}`" height="200px"></v-img>
           <v-card-title class="title-wrap">{{ grid.name }}</v-card-title>
           <v-card-subtitle class="desc-wrap">{{
             grid.description
@@ -58,7 +71,7 @@ const paginatedGrids = computed(() => {
   </v-container>
   <v-pagination
     v-model="currentPage"
-    :length="Math.ceil((promotionGrids?.length || 0) / itemsPerPage)"
+    :length="maxPage"
   ></v-pagination>
   <v-container class="about-section mb-16 mt-16 py-10">
     <h2 class="text-center font-weight-bold mt-12">

@@ -5,10 +5,20 @@ import { ref, computed } from 'vue'
 const cart = useCartStore()
 const route = useRoute()
 const productId = route.params.id
-const { data: promotionGrids } = await useFetch('/api/promotionGrids')
+const config = useRuntimeConfig()
+interface Product {
+  id: number
+  name: string
+  description: string
+  category: string
+  imageUrl: string
+  stock: number
+  price: number
+}
+const { data: Products } = await useFetch<Product[]>(`${config.public.apiBase}/Product/GetAllProducts`)
 const product = computed(() => {
-  if (!promotionGrids.value) return null
-  return promotionGrids.value.find((item: any) => item.id == productId)
+  if (!Products.value) return null
+  return Products.value.find((item: any) => item.id == productId)
 })
 const quantity = ref(1)
 </script>
@@ -25,7 +35,7 @@ const quantity = ref(1)
       <v-row>
         <v-col cols="12" md="6">
           <v-card class="rounded-xl">
-            <v-img :src="product.image" height="500" contain></v-img>
+            <v-img :src="`/images/${product.imageUrl}`" height="500" contain></v-img>
           </v-card>
         </v-col>
 
