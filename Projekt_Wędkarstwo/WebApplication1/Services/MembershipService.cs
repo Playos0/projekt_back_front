@@ -35,7 +35,7 @@ namespace WebApplication1.Services
 
             //buying when active lock 
             var hasActiveMembership = await _context.UserMemberships
-                .AnyAsync(m => m.UserId == user.Id && m.EndDate > DateTime.UtcNow);
+                .AnyAsync(m => m.UserId == user.Id && m.IsActive);
 
             if (hasActiveMembership)
             {
@@ -89,29 +89,40 @@ namespace WebApplication1.Services
                 return null;
             }
 
-            if (membership.EndDate < DateTime.UtcNow)
+            bool stateChaned = false;
+
+            if (membership.EndDate <= DateTime.UtcNow)
             {
-                membership.IsActive = false;
+                if (membership.AutoRenew)
+                {
+                    membership.EndDate = membership.EndDate.AddMonths(membership.DurationInMonths);
+                    membership.StartDate = DateTime.UtcNow;
+
+                    stateChaned = true;
+                }
+                else
+                {
+                    membership.IsActive = false;
+                    stateChaned = true;
+                }
+            }
+
+            if(stateChaned)
+            {
                 await _context.SaveChangesAsync();
             }
 
-
-            //renew logic
-            if (membership.AutoRenew && membership.EndDate <= DateTime.UtcNow)
+            if (!membership.IsActive)
             {
-                membership.EndDate = membership.EndDate = membership.EndDate.AddMonths(membership.DurationInMonths);
-
-                membership.StartDate = DateTime.UtcNow;
-                membership.IsActive = true;
-
-                await _context.SaveChangesAsync();
+                return null;
             }
+
             return new MembershipDto
             {
                 Name = membership.Membership.Name,
                 StartDate = membership.StartDate,
                 EndDate = membership.EndDate,
-                IsActive = membership.EndDate > DateTime.UtcNow,
+                IsActive = membership.IsActive,
                 AutoRenewal = membership.AutoRenew,
                 DiscountPercentage = membership.Membership.DiscountPercentage,
                 IncludesMysteryBox = membership.Membership.IncludesMysteryBox
