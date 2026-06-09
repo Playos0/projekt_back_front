@@ -74,6 +74,9 @@ builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
 //serwis do łowisk
 builder.Services.AddScoped<IFishingSpotService, FishingSpotService>();
 
+//serwis do członkostwa
+builder.Services.AddScoped<IMembershipService, MembershipService>();
+
 //tutaj dodanie CORS
 builder.Services.AddCors(options =>
 {

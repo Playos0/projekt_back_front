@@ -13,6 +13,8 @@ namespace WebApplication1.Data
         public DbSet<FishingPass> FishingPasses { get; set; }
         public DbSet<SubscriptionPlan> SubscriptionPlans { get; set; }
         public DbSet<UserSubscription> UserSubscriptions { get; set; }
+        public DbSet<Membership> Memberships { get; set; }
+        public DbSet<UserMembership> UserMemberships { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -94,6 +96,24 @@ namespace WebApplication1.Data
             modelBuilder.Entity<FishingSpot>()
                 .Property(f => f.Longitude)
                 .HasPrecision(9, 6);
+
+
+            //do członkostwa
+            modelBuilder.Entity<UserMembership>()
+                .HasOne(um => um.User)
+                .WithMany()
+                .HasForeignKey(um => um.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UserMembership>()
+                .HasOne(um => um.Membership)
+                .WithMany()
+                .HasForeignKey(um => um.MembershipId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Membership>()
+                .Property(t => t.Price)
+                .HasPrecision(18, 2);
 
             base.OnModelCreating(modelBuilder);
         }
