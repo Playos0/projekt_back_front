@@ -26,6 +26,7 @@ const paginatedGrids = computed(() => {
 </script>
 
 <template>
+  
   <v-container class="mt-8">
     <v-carousel
       v-if="promotionSlides"

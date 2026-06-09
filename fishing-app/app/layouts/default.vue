@@ -1,3 +1,6 @@
+<script setup lang="ts">
+import Navbar from '~/components/Navbar.vue'
+</script>
 <template>
   <div>
     <Navbar />
@@ -7,6 +10,3 @@
     <AppFooter />
   </div>
 </template>
-<script setup lang="ts">
-import Navbar from "~/components/Navbar.vue";
-</script>

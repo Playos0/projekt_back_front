@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 import { computed, ref } from 'vue'
+import { watch } from 'vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -55,6 +56,13 @@ const paginatedProducts = computed(() => {
   const end = start + itemsPerPage
   return filteredProducts.value.slice(start, end)
 })
+
+watch(page, () => {
+  window.scrollTo({
+    top: 0, 
+    behavior: 'smooth'
+  })
+})
 </script>
 
 <template>
@@ -84,7 +92,7 @@ const paginatedProducts = computed(() => {
             <ProductCard :product="product" />
           </v-col>
         </v-row>
-          <v-pagination v-model="page" :length="totalPages"></v-pagination>
+        <v-pagination v-model="page" :length="totalPages"></v-pagination>
       </v-col>
     </v-row>
   </v-container>
