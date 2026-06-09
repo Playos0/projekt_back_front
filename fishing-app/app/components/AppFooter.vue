@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import { Icon } from "@iconify/vue";
-const socialIcons = [
-  "mdi:facebook",
-  "mdi:twitter",
-  "mdi:instagram",
-  "mdi:youtube",
-];
+import { Icon } from '@iconify/vue'
+const socialIcons = ['mdi:facebook', 'mdi:twitter', 'mdi:instagram', 'mdi:youtube']
 </script>
 
 <template>
@@ -15,13 +10,11 @@ const socialIcons = [
         <Icon :icon="icon" width="24" height="24" />
       </v-btn>
     </div>
-    <div class="text-center w-50 mb-4">
-      Odkąd pamiętam mój stary był fanatykiem leczo. Odkąd k**wa pamiętam tylko
-      to gotował. Zaczęło się niewinnie, jakoś za komuny jak pojechali z matką
-      do Budapesztu. Stary wręcz zachłysnął się kulturą Madziarów i zapragnął
-      przenieść ją na nasz grunt. Pół mieszkania zaje**ne papryką, cebulą i
-      przecierem pomidorowym, najgorzej.
-    </div>
+    <p class="text-center w-50 mb-4">
+      Twój kompleksowy asystent wędkarski. Łączymy pasję do wędkarstwa z nowoczesną technologią, dostarczając miłośnikom
+      tego sportu zintegrowaną platformę. Znajdziesz u nas nie tylko profesjonalny sprzęt, ale również interaktywną mapę
+      najlepszych łowisk oraz szczegółową encyklopedię gatunków ryb.
+    </p>
     <div class="text-center text-sm text-grey-lighten-1">
       Copyright © 2026 Wędkarski Świat | Wszelkie prawa zastrzeżone
     </div>

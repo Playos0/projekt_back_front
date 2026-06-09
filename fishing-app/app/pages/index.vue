@@ -82,13 +82,11 @@ const paginatedGrids = computed(() => {
       class="text-center text-white mb-16 mx-auto text-body-1"
       style="max-width: 900px"
     >
-      Mój stary to fanatyk wędkarstwa. Pół mieszkania z******e wędkami
-      najgorsze. Średnio raz w miesiącu ktoś wdepnie w leżący na ziemi haczyk
-      czy kotwicę i trzeba wyciągać w szpitalu, bo mają zadziory na końcu. W
-      swoim dwudziestodwuletnim życiu już z 10 razy byłem na takim zabiegu.
-      Tydzień temu poszedłem na jakieś losowe badania, to baba z recepcji jak
-      mnie tylko zobaczyła, to kazała buta ściągać xD, bo myślała, że znowu hak
-      w nodze.
+      Witaj w miejscu stworzonym przez wędkarzy dla wędkarzy. Nasz portal to nie tylko sklep 
+  z niezawodnym sprzętem, ale również kompendium wiedzy o gatunkach ryb i interaktywna baza 
+  najlepszych łowisk. Niezależnie od tego, czy dopiero zaczynasz swoją przygodę z wędką, 
+  czy walczysz o kolejne życiowe rekordy - dostarczymy Ci wszystko, czego potrzebujesz, 
+  aby każda wyprawa nad wodę zakończyła się pełnym sukcesem.
     </p>
     <v-row class="mt-4">
       <v-col cols="12" md="4" class="text-center">
