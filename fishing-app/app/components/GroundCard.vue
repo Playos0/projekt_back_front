@@ -20,7 +20,7 @@ const { data: Grounds } = await useFetch<Ground[]>(`${config.public.apiBase}/fis
 
 <template>
   <v-container fluid class="mt-8 mb-16">
-    <h2 class="text-center font-weight-bold">Dostępne łowiska</h2>
+    <h2 class="text-center font-weight-bold">Łowiska</h2>
     <v-row>
       <v-col v-for="ground in Grounds" :key="ground.id" cols="12">
         <v-card>
@@ -53,7 +53,7 @@ const { data: Grounds } = await useFetch<Ground[]>(`${config.public.apiBase}/fis
                   prepend-icon="mdi-cart-plus"
                   @click="cart.addItem(ground)"
                 >
-                  Kup karnet
+                  Kup Wejściówkę
                 </v-btn>
               </v-card-actions>
             </v-col>

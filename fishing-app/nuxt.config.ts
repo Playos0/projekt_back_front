@@ -4,17 +4,12 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBase:'http://localhost:5004/api',
+      apiBase: 'http://localhost:5004/api',
     },
   },
-  css: [
-    'leaflet/dist/leaflet.css',
-    '~/assets/css/main.css',
-    'vuetify/styles',
-    '@mdi/font/css/materialdesignicons.css'
-  ],
+  css: ['leaflet/dist/leaflet.css', '~/assets/css/main.css', 'vuetify/styles', '@mdi/font/css/materialdesignicons.css'],
 
   build: {
-    transpile: ['vuetify']
+    transpile: ['vuetify'],
   }
 })

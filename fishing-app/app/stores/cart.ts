@@ -10,7 +10,8 @@ export interface CartItem {
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    items: [] as CartItem[]
+    items: [] as CartItem[],
+    notification: null as string | null
   }),
 
   actions: {
@@ -21,6 +22,8 @@ export const useCartStore = defineStore('cart', {
       } else {
         this.items.push({ ...product, quantity: quantity });
       }
+      this.notification = `Dodano: ${product.name} do koszyka!`;
+      setTimeout(() => this.notification = null, 2000);
     },
     
     removeItem(itemId: number) {
