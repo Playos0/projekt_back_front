@@ -51,15 +51,15 @@ const handleCheckout = async () => {
       body: payload
     })
 
-    alert("Zamówienie zostało pomyślnie złożone!")
+    alert("Orders made successfully!")
     cart.items = [] 
 
   } catch (error: any) {
     console.error("Szczegóły błędu:", error)
     if (error.response?.status === 401) {
-      alert("Autoryzacja odrzucona (401). Sprawdź czy token w ciasteczkach jest poprawny.")
+      alert("error 401")
     } else {
-      alert("Błąd podczas składania zamówienia. Sprawdź konsolę (F12).")
+      alert("something went wrong with your order. Please try again later.")
     }
   }
 }
