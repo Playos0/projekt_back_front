@@ -116,7 +116,7 @@ async function test() {
     <div class="bg-black flex-grow-1 d-flex align-center justify-center overflow-y-auto">
       <v-form v-model="valid" style="width: 100%; max-width: 550px " class="bg-white rounded-lg ">
         <v-container>
-<v-row class="flex-column border-thin rounded-lg pa-6 text-center ma-4 ">          
+<v-row class="flex-column border-thin rounded-lg pa-6 text-center ma-4 mt-16">          
   <h1 class="text-h4 mb-4">Creating new account</h1>
 
             <v-col cols="12" class="text-left pb-0">
